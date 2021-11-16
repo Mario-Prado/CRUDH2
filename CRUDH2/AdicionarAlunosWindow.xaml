@@ -1,0 +1,19 @@
+﻿<Window x:Class="CRUDH2.AdicionarAlunosWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRUDH2"
+        mc:Ignorable="d"
+        Title="AdicionarAlunosWindow" Height="450" Width="800">
+    <Grid Margin="-2,0,2,0">
+        <Label Content="Dados do aluno" FontSize="16" HorizontalAlignment="Left" Margin="80,68,0,0" VerticalAlignment="Top"/>
+        <Label Content="CPF" HorizontalAlignment="Left" Margin="206,134,0,0" VerticalAlignment="Top"/>
+        <Label Content="Nome" HorizontalAlignment="Left" Margin="204,169,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cidade" HorizontalAlignment="Left" Margin="204,204,0,0" VerticalAlignment="Top" Width="63" Height="34"/>
+        <Button Content="Adicionar aluno" HorizontalAlignment="Center" Margin="0,299,0,0" VerticalAlignment="Top" Width="131" Height="26"/>
+        <TextBox HorizontalAlignment="Left" Margin="272,138,0,0" TextWrapping="Wrap" Text="{Binding AlunoNovo.Cpf}" VerticalAlignment="Top" Width="150" Height="18"/>
+        <TextBox HorizontalAlignment="Left" Margin="272,173,0,0" TextWrapping="Wrap" Text="{Binding AlunoNovo.Nome}" VerticalAlignment="Top" Width="300" Height="18"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding AlunoNovo.Cidade}" VerticalAlignment="Center" Width="300" Height="18" Margin="272,0,0,0"/>
+    </Grid>
+</Window>
