@@ -62,9 +62,13 @@
       <DependentUpon>NovaTurmaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="UpdateWindow.xaml.cs">
+      <DependentUpon>UpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AdicionarAlunosWindowVM.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
     <Compile Include="ViewModels\NovaTurmaWindowVM.cs" />
+    <Compile Include="ViewModels\UpdateWindowVM.cs" />
     <Page Include="AdicionarAlunosWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -82,6 +86,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NovaTurmaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

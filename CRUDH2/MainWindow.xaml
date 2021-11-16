@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CRUDH2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="600">
     <Grid Margin="0,10,0,5">
         <StackPanel Width="300">
             <Button Command ="{Binding ComandoCadastrarNovaTurma}"  Content="Cadastrar nova turma" Height="20"/>
             <StackPanel Orientation="Horizontal" Height="22">
-                <Button Margin="0 2 0 0" Height="20" Width="90" Content="Buscar" />
-                <TextBox Margin="2 2 0 0" Width="208" HorizontalAlignment="Right" Height="20" TextWrapping="Wrap" Text="Digite o código da turma"/>
+                <Button Command="{Binding ComandoBuscar}"  Margin="0 2 0 0" Height="20" Width="90" Content="Buscar" />
+                <TextBox Text="{Binding ValorBuscado}" Margin="2 2 0 0" Width="208" HorizontalAlignment="Right" Height="20" TextWrapping="Wrap" />
             </StackPanel>
-            <ListView ItemsSource="{Binding ListaTurmas}" Margin="0 2 0 0"  Height="326" >
+            <ListView ItemsSource="{Binding TurmasFiltradas}" SelectedItem="{Binding TurmaSelecionada}" Margin="0 2 0 0"  Height="326" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Codigo}" Header="Código" Width="50"/>
@@ -21,8 +21,8 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Margin="0 2 0 0" Content="Atualizar turma selecionada"/>
-            <Button Margin="0 2 0 0" Content="Deleter Turma seleciodana"/>
+            <Button Margin="0 2 0 0" Command="{Binding ComandoAtualizarDocente}" Content="Atualizar Professor da turma selecionada"/>
+            <Button Margin="0 2 0 0" Command ="{Binding ComandoDeletar}" Content="Deleter Turma selecionada"/>
 
         </StackPanel>
 
