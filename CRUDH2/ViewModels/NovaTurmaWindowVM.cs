@@ -1,6 +1,8 @@
 ﻿using CRUDH2.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +11,13 @@ using System.Windows.Input;
 
 namespace CRUDH2.ViewModels
 {
-    public class NovaTurmaWindowVM
+    public class NovaTurmaWindowVM : INotifyPropertyChanged
     {
-
+        public MainWindowVM ViewModel { get; set; } 
+       
         public ICommand ComandoBtnAdicionarAlunos { get; private set; }
+
+        public ICommand ComandoBtnConcluir { get; private set; }
 
         public Turma TurmaNova { get; set; } 
 
@@ -22,16 +27,30 @@ namespace CRUDH2.ViewModels
             ICommand comando = new RelayCommand((object param) =>
             {
                 Window TelaAdicionarAlunos = new AdicionarAlunosWindow();
-                TelaAdicionarAlunos.DataContext = new AdicionarAlunosWindowVM();
+                TelaAdicionarAlunos.DataContext = new AdicionarAlunosWindowVM(this);
                 TelaAdicionarAlunos.Show();
+            });
+            return comando;
+        }
+
+        public ICommand ConcluirCadastroDeTurmaNova(MainWindowVM ViewModel)
+        {
+            ICommand comando = new RelayCommand((object param) =>
+            {
+                ViewModel.ListaTurmas.Add(TurmaNova);
+                this.TurmaNova = null;
+                NotificaTela("TurmaNova");
+                ViewModel.TelaCadastroNovaTurma.Close();
             });
             return comando;
         }
         #endregion
 
-        public NovaTurmaWindowVM()
+        public NovaTurmaWindowVM(MainWindowVM _ViewModel)
         {
+            ViewModel = _ViewModel;
             ComandoBtnAdicionarAlunos = AdicionarAlunos();
+            ComandoBtnConcluir = ConcluirCadastroDeTurmaNova(ViewModel);
             TurmaNova = new Turma()
             {
                 Codigo = "aaa",
@@ -41,7 +60,7 @@ namespace CRUDH2.ViewModels
                     Nome = "José Saramago",
                     Especialidade = "Lingua portuguesa"
                 },
-                Alunos = new List<Discente>()
+                Alunos = new ObservableCollection<Discente>()
                 {
                     new Discente()
                     {
@@ -57,6 +76,11 @@ namespace CRUDH2.ViewModels
                     }
                 }
             };
-        } 
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotificaTela( string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

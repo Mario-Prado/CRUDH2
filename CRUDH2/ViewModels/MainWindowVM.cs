@@ -16,15 +16,16 @@ namespace CRUDH2.ViewModels
 
         public ICommand ComandoCadastrarNovaTurma { get; private set; }
 
-
+        public Window TelaCadastroNovaTurma { get; set; }
         #region COMANDOS
         public ICommand CadastrarNovaTurma()
         {
             ICommand comando = new RelayCommand((object param) =>
             {
                 Window TelaNovaTurma = new NovaTurmaWindow();
-                TelaNovaTurma.DataContext = new NovaTurmaWindowVM();
+                TelaNovaTurma.DataContext = new NovaTurmaWindowVM(this);
                 TelaNovaTurma.Show();
+                TelaCadastroNovaTurma = TelaNovaTurma;
             });
             return comando;
         }
@@ -42,7 +43,7 @@ namespace CRUDH2.ViewModels
                     Nome = "Aparecido do Rio",
                     Especialidade = "Matemática"
                 },
-                Alunos = new List<Discente>()
+                Alunos = new ObservableCollection<Discente>()
                 {
                     new Discente()
                     {

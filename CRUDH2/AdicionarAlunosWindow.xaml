@@ -11,7 +11,7 @@
         <Label Content="CPF" HorizontalAlignment="Left" Margin="206,134,0,0" VerticalAlignment="Top"/>
         <Label Content="Nome" HorizontalAlignment="Left" Margin="204,169,0,0" VerticalAlignment="Top"/>
         <Label Content="Cidade" HorizontalAlignment="Left" Margin="204,204,0,0" VerticalAlignment="Top" Width="63" Height="34"/>
-        <Button Content="Adicionar aluno" HorizontalAlignment="Center" Margin="0,299,0,0" VerticalAlignment="Top" Width="131" Height="26"/>
+        <Button Command="{Binding ComandoAdicionarAluno}"  Content="Adicionar aluno" HorizontalAlignment="Center" Margin="0,299,0,0" VerticalAlignment="Top" Width="131" Height="26"/>
         <TextBox HorizontalAlignment="Left" Margin="272,138,0,0" TextWrapping="Wrap" Text="{Binding AlunoNovo.Cpf}" VerticalAlignment="Top" Width="150" Height="18"/>
         <TextBox HorizontalAlignment="Left" Margin="272,173,0,0" TextWrapping="Wrap" Text="{Binding AlunoNovo.Nome}" VerticalAlignment="Top" Width="300" Height="18"/>
         <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding AlunoNovo.Cidade}" VerticalAlignment="Center" Width="300" Height="18" Margin="272,0,0,0"/>
