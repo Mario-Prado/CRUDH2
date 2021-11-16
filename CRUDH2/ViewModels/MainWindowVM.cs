@@ -17,6 +17,7 @@ namespace CRUDH2.ViewModels
         public ICommand ComandoCadastrarNovaTurma { get; private set; }
 
         public Window TelaCadastroNovaTurma { get; set; }
+        
         #region COMANDOS
         public ICommand CadastrarNovaTurma()
         {

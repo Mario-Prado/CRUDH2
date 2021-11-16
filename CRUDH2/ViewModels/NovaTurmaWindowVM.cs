@@ -38,7 +38,7 @@ namespace CRUDH2.ViewModels
             ICommand comando = new RelayCommand((object param) =>
             {
                 ViewModel.ListaTurmas.Add(TurmaNova);
-                this.TurmaNova = null;
+                //this.TurmaNova = null;
                 NotificaTela("TurmaNova");
                 ViewModel.TelaCadastroNovaTurma.Close();
             });
@@ -48,9 +48,6 @@ namespace CRUDH2.ViewModels
 
         public NovaTurmaWindowVM(MainWindowVM _ViewModel)
         {
-            ViewModel = _ViewModel;
-            ComandoBtnAdicionarAlunos = AdicionarAlunos();
-            ComandoBtnConcluir = ConcluirCadastroDeTurmaNova(ViewModel);
             TurmaNova = new Turma()
             {
                 Codigo = "aaa",
@@ -76,11 +73,17 @@ namespace CRUDH2.ViewModels
                     }
                 }
             };
+            ViewModel = _ViewModel;
+            ComandoBtnAdicionarAlunos = AdicionarAlunos();
+            ComandoBtnConcluir = ConcluirCadastroDeTurmaNova(ViewModel);
         }
+
+        #region NotificaTela
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotificaTela( string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

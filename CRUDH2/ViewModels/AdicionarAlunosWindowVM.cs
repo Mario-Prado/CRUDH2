@@ -16,11 +16,11 @@ namespace CRUDH2.ViewModels
 
         public ICommand ComandoAdicionarAluno { get; set; }
 
-        public ICommand AdicionarAluno(NovaTurmaWindowVM _ViewModel)
+        public ICommand AdicionarAluno()
         {
             ICommand comando = new RelayCommand((object param) =>
             {
-                _ViewModel.TurmaNova.Alunos.Add(AlunoNovo);
+                ViewModel.TurmaNova.Alunos.Add(new Discente() { Cpf = AlunoNovo.Cpf,Nome = AlunoNovo.Nome, Cidade = AlunoNovo.Cidade });
             });
             return comando;
         }
@@ -34,7 +34,7 @@ namespace CRUDH2.ViewModels
                     Nome = "Bart Simpson",
                     Cidade = "Altinópolis"   
                 };
-            ComandoAdicionarAluno = AdicionarAluno(ViewModel);
+            ComandoAdicionarAluno = AdicionarAluno();
         }
        
     }
