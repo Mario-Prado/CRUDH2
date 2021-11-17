@@ -26,84 +26,6 @@ namespace CRUDH2.ViewModels
         public ICommand ComandoAtualizarDocente { get; private set; }
 
 
-        #region COMANDOS
-        public ICommand CadastrarNovaTurma()
-        {
-            ICommand comando = new RelayCommand((object param) =>
-            {
-                Window TelaNovaTurma = new NovaTurmaWindow();
-                TelaNovaTurma.DataContext = new NovaTurmaWindowVM(this);
-                TelaNovaTurma.Show();
-                TelaCadastroNovaTurma = TelaNovaTurma;
-            });
-            return comando;
-        }
-
-        public ICommand Buscar()
-        {
-            ICommand comando = new RelayCommand((object param) =>
-            {
-                ObservableCollection<Turma> ListaTeporaria = new ObservableCollection<Turma>();
-                foreach (Turma turma in ListaTurmas)
-                {
-                    if (turma.Codigo.Contains(ValorBuscado) | turma.Professor.Nome.Contains(ValorBuscado))
-                    {
-                        ListaTeporaria.Add(turma);
-                        TurmasFiltradas = ListaTeporaria;
-                        NotificaTela("TurmasFiltradas");
-                    }
-                }
-            });
-            return comando;
-        }
-
-        public ICommand Deletar()
-        {
-            ICommand comando = new RelayCommand((object param) =>
-            {
-                ListaTurmas.Remove(TurmaSelecionada);
-                TurmasFiltradas = ListaTurmas;
-                NotificaTela("TurmasFiltradas");
-            }, (object param) =>
-            {
-                if (ListaTurmas.Count > 0 & TurmaSelecionada != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            });
-            return comando;
-        }
-
-        public ICommand AtualizarDocente()
-        {
-            ICommand comando = new RelayCommand((object param) =>
-            {
-                Window TelaAtualizar = new UpdateWindow();
-                TelaAtualizar.DataContext = new UpdateWindowVM(this);
-                TelaAtualizar.Show();
-                TelaAtualizarProfessor = TelaAtualizar;
-
-            }, (object param) =>
-            {
-                if (ListaTurmas.Count > 0 & TurmaSelecionada != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            });
-            return comando;
-        }
-
-
-        #endregion
-
         public MainWindowVM()
         {
             ListaTurmas = new ObservableCollection<Turma>();
@@ -133,16 +55,74 @@ namespace CRUDH2.ViewModels
                 }
             });
             TurmasFiltradas = ListaTurmas;
-            ComandoCadastrarNovaTurma = CadastrarNovaTurma();
-            ComandoDeletar = Deletar();
-            ComandoBuscar = Buscar();
-            ComandoAtualizarDocente = AtualizarDocente();
+            CriarComandos();
+        }
+
+        public void CriarComandos()
+        {
+            ComandoCadastrarNovaTurma = new RelayCommand((object param) =>
+            {
+                Window TelaNovaTurma = new NovaTurmaWindow();
+                TelaNovaTurma.DataContext = new NovaTurmaWindowVM(this);
+                TelaNovaTurma.Show();
+                TelaCadastroNovaTurma = TelaNovaTurma;
+            });
+
+            ComandoBuscar  = new RelayCommand((object param) =>
+            {
+                ObservableCollection<Turma> ListaTeporaria = new ObservableCollection<Turma>();
+                foreach (Turma turma in ListaTurmas)
+                {
+                    if (turma.Codigo.Contains(ValorBuscado) | turma.Professor.Nome.Contains(ValorBuscado))
+                    {
+                        ListaTeporaria.Add(turma);
+                        TurmasFiltradas = ListaTeporaria;
+                        NotificaTela("TurmasFiltradas");
+                    }
+                }
+            });
+
+            ComandoDeletar = new RelayCommand((object param) =>
+            {
+                ListaTurmas.Remove(TurmaSelecionada);
+                TurmasFiltradas = ListaTurmas;
+                NotificaTela("TurmasFiltradas");
+            }, (object param) =>
+            {
+                if (ListaTurmas.Count > 0 & TurmaSelecionada != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
+
+            ComandoAtualizarDocente = new RelayCommand((object param) =>
+            {
+                Window TelaAtualizar = new UpdateWindow();
+                TelaAtualizar.DataContext =  new UpdateWindowVM(this);
+                TelaAtualizar.Show();
+                TelaAtualizarProfessor = TelaAtualizar;
+
+            }, (object param) =>
+            {
+                if (ListaTurmas.Count > 0 & TurmaSelecionada != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
         }
 
         #region NotificaTela
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotificaTela(string propertyName)
+ 
+        private void NotificaTela(String propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

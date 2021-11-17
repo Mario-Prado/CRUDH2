@@ -38,8 +38,8 @@ namespace CRUDH2.ViewModels
             ICommand comando = new RelayCommand((object param) =>
             {
                 ViewModel.ListaTurmas.Add(TurmaNova);
-                //this.TurmaNova = null;
                 NotificaTela("TurmaNova");
+                MessageBoxResult result = MessageBox.Show("Turma cadastrada com sucesso");
                 ViewModel.TelaCadastroNovaTurma.Close();
             });
             return comando;
